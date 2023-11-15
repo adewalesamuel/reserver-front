@@ -3,7 +3,7 @@ import Sidebar from '../components/headers/Sidebar'
 
 export default function Dashboard({component, activeSideBarText}) {
   return (
-    <div className='flex fixed bg-gray-200 h-screen w-full'>
+    <div className='flex bg-gray-200 w-full'>
         <div className={`h-full ${activeSideBarText ? 'w-[25%]' : 'w-[10%]'}`}>
             <Sidebar activeSideBarText={activeSideBarText} />
         </div>

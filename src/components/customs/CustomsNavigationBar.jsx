@@ -7,7 +7,6 @@ export default function CustomsNavigationBar({menu, setMenu}) {
         index: 0
     })
     const changePage = (item_index)=>{
-        console.log(item_index);
         setMenu((menu)=>{
             return menu.map((_, index)=>{
                 return {
