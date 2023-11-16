@@ -88,7 +88,7 @@ export function EventForm(props) {
                 </label>
                 <div className="border border-gray-300 rounded-lg p-4 flex flex-nowrap items-center">
                     <div className="w-9/12 text-gray-400 pr-8">
-                        Organisez la les contributiosn et desser la liste des articles à
+                        Organisez les contributions et dresser la liste des articles à
                         apporter à l'évènement
                     </div>
                     <div className="w-3/12 relative custom-checkbox">
