@@ -1,0 +1,7 @@
+.custom-checkbox input:checked ~ .custom-checkbox-bg {
+    background-color: rgb(7, 155, 103) !important;
+}
+
+.custom-checkbox input:checked  ~ .custom-checkbox-bg .custom-checkbox-fg {
+    right: 2px;
+}

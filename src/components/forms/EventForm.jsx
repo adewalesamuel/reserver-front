@@ -86,6 +86,20 @@ export function EventForm(props) {
                 <label htmlFor="note" className="uppercase block">
                     Liste de ce qu'il faut apporter
                 </label>
+                <div className="border border-gray-300 rounded-lg p-4 flex flex-nowrap items-center">
+                    <div className="w-9/12 text-gray-400 pr-8">
+                        Organisez la les contributiosn et desser la liste des articles à
+                        apporter à l'évènement
+                    </div>
+                    <div className="w-3/12 relative custom-checkbox">
+                        <input type="checkbox" className="w-full h-full absolute cursor-pointer" 
+                        style={{opacity: '0', zIndex: 10}} onChange={props.handleItemClick}/>
+                        <div className="w-full rounded-full bg-gray-500 h-9 relative custom-checkbox-bg" 
+                        style={{padding: "2px"}}>
+                            <div className="h-8 absolute w-8 bg-white rounded-full custom-checkbox-fg"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     )
