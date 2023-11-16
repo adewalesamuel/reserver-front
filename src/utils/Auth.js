@@ -1,5 +1,5 @@
 const getSessionToken = () => {
-    return localStorage.getItem('sessionToken');
+    return localStorage.getItem('utk');
 }
 
 const isLoggedIn = () => {
@@ -9,7 +9,7 @@ const isLoggedIn = () => {
 }
 
 const setSessionToken = token => {
-    localStorage.setItem('sessionToken', token)
+    localStorage.setItem('utk', token)
 }
 
 const setUser = user => {
@@ -17,7 +17,7 @@ const setUser = user => {
 }
 
 const removeSessionToken = () => {
-    localStorage.removeItem('sessionToken');
+    localStorage.removeItem('utk');
     localStorage.removeItem('user');
 }
 

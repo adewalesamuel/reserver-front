@@ -7,15 +7,46 @@ import giftInviitationIcon from '../assets/images/Cadeau et Invitation.png'
 import { Components } from '../components';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Services } from '../services';
+import { Utils } from '../utils';
+import { Layouts } from '../layouts';
 
 export function LoginView() {
+    let abortController = new AbortController();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isDisabled, ] = useState(false);
+    const [errorMessages, setErrorMessages] = useState([]);
+    const [isDisabled, setIsDisabled] = useState(false);
+
+    const handleLoginSubmit = async e => {
+        e.preventDefault();
+        setIsDisabled(true);
+        setErrorMessages([]);
+
+        try {
+            const payload = {
+                email, password
+            }
+
+            const {user, token} = await Services.AuthService.login(
+                JSON.stringify(payload), abortController.signal);
+
+            Utils.Auth.setSessionToken(token);
+            Utils.Auth.setUser(user);
+
+            window.location.replace('/app');
+        } catch (error) {
+            const messages = await error.messages ?? error.message;
+            setErrorMessages(messages);
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }finally{
+            setIsDisabled(false);
+        }
+    }
 
     return (
-        <>
+        <Layouts.AuthLayout>
             <div className="grid md:grid-cols-2 relative text-primary lg:h-screen 
             items-center">
                 <div className="bg-gradient-to-t from-[#F97E8D] to-white hidden 
@@ -31,8 +62,11 @@ export function LoginView() {
                     className="px-1 md:px-8 py-5 h-full w-full lg:flex lg:items-center lg:justify-center">
                         <div className="backdrop-blur-sm bg-white/80 p-5 md:p-10 rounded-3xl">
                             <h3 className="text-4xl">Hey! Quoi de neuf ? <br /> Connectez-vous</h3>
+                            <Components.ErrorMessages>
+                                {errorMessages}
+                            </Components.ErrorMessages>
                             <Components.LoginVForm email={email} password={password} isDisabled={isDisabled}
-                            setEmail={setEmail} setPassword={setPassword}/>
+                            setEmail={setEmail} setPassword={setPassword} handleSubmit={handleLoginSubmit}/>
                             <div className="mb-10 items-center">
                                 <div className="text-center my-6">
                                     <span className="">ou continuer avec :</span>
@@ -67,6 +101,6 @@ export function LoginView() {
                     <img src={giftInviitationIcon} className="h-[30em]" alt="" />
                 </div>
             </div>
-        </>
+        </Layouts.AuthLayout>
     )
 }

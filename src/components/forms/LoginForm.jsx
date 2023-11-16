@@ -21,7 +21,7 @@ export function LoginVForm(props) {
                 <div className="col-span-2">
                     <button className="rounded-xl bg-secondary text-primary py-4 w-full 
                     uppercase" id="submit_button" disabled={props.isDisabled}>
-                        {props.isDisabled ? "Chargemets..." : "Se connecter"}
+                        {props.isDisabled ? "Chargements..." : "Se connecter"}
                     </button>
                 </div>
             </div>

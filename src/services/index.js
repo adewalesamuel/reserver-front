@@ -12,6 +12,7 @@ import { EventMediaService } from './EventMediaService';
 import { PermissionService } from './PermissionService';
 import { RoleService } from './RoleService';
 import { AdminService } from './AdminService';
+import { AuthService } from './AuthService';
 
 export const Services = {
     CountryService,
@@ -28,5 +29,5 @@ export const Services = {
 	PermissionService,
 	RoleService,
 	AdminService,
-	
+	AuthService
 }

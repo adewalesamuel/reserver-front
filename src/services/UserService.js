@@ -13,7 +13,7 @@ const getById = (id, signal) => {
 }
 
 const create = (payload, signal) => {
-    return Api.post(ENPOINTS.User, payload, signal)
+    return Api.post('register', payload, signal)
 }
 
 const update = (id, payload, signal) => {

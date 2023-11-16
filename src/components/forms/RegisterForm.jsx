@@ -1,4 +1,4 @@
-export function RegisterVForm(props) {
+export function RegisterForm(props) {
     return (
         <form className="md:grid grid-cols-1 md:grid-cols-2 text-gray-500 gap-6" 
         id="register-form" onSubmit={props.handleSubmit}>
@@ -51,9 +51,10 @@ export function RegisterVForm(props) {
                 </label>
             </div>
             <div className="col-span-2">
-                <button id="submit_button" className="rounded-xl bg-secondary text-primary py-4 w-full" 
+                <button id="submit_button" className="rounded-xl bg-secondary text-primary py-4 w-full
+                uppercase" 
                 disabled={props.isDisabled}>
-                    {props.isDisabled ? "Chargemets..." : "CRÉER UN COMPTE"}
+                    {props.isDisabled ? "Chargements..." : "Créer un compte"}
                 </button>
             </div>
         </form>

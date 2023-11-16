@@ -7,13 +7,46 @@ import giftInviitationIcon from '../assets/images/Cadeau et Invitation.png'
 import { Components } from '../components';
 import { Link } from 'react-router-dom';
 import { Hooks } from '../hooks';
+import { Utils } from '../utils';
+import { useState } from 'react';
+import { Layouts } from '../layouts';
 
 export function RegisterView(){
+    let abortController = new AbortController();
 
     const useUser = Hooks.useUser();
+    const [errorMessages, setErrorMessages] = useState([]);
+
+    const handleUserSubmit = async e => {
+        e.preventDefault();
+        useUser.setIsDisabled(true);
+        setErrorMessages([]);
+
+        try {
+            if (!useUser.condition) 
+                throw new Error('Vous devez accepter les conditions d\'utilisation.');
+            
+            if (useUser.password !== useUser.confirm_password)
+                throw new Error('Les mots de passes de correspondent pas.')
+
+            const { user, token } = await useUser.createUser(
+                abortController.signal);
+
+            Utils.Auth.setSessionToken(token);
+            Utils.Auth.setUser(user);
+
+            window.location.replace('/app');
+        } catch (error) {
+            const messages = await error.messages ?? error.message;
+            setErrorMessages(messages);
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }finally{
+            useUser.setIsDisabled(false);
+        }
+    }
 
     return (
-        <>
+        <Layouts.AuthLayout>
            <div className="grid md:grid-cols-2 relative text-primary lg:h-screen items-center">
                 <div className="bg-gradient-to-t from-[#F97E8D] to-white hidden md:block h-full">
                     <div className="pt-20 pl-20">
@@ -30,7 +63,11 @@ export function RegisterView(){
                             <div className="my-8 text-gray-500">
                                 Créez un compte aujourd'hui et commencez à utiliser RESERVEZ
                             </div>
-                            <Components.RegisterVForm useUser={useUser} isDisbled={useUser.isDisabled}/>
+                            <Components.ErrorMessages>
+                                {errorMessages}
+                            </Components.ErrorMessages>
+                            <Components.RegisterForm useUser={useUser} isDisabled={useUser.isDisabled} 
+                            handleSubmit={handleUserSubmit}/>
 
                             <div className="mb-10 items-center">
                                 <div className="text-center my-6">
@@ -65,6 +102,6 @@ export function RegisterView(){
                     <img src={giftInviitationIcon} className="h-[30em]" alt="" />
                 </div>
             </div>
-        </>
+        </Layouts.AuthLayout>
     )
 }

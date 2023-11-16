@@ -1,17 +1,19 @@
+import { ErrorMessages } from "./ErrorMessages"
 import { Modal } from "./Modal"
 import { PrimaryButton } from "./PrimaryButton"
 import { EventForm } from "./forms/EventForm"
 import { ItemForm } from "./forms/ItemForm"
 import { LoginVForm } from "./forms/LoginForm"
 import { OrganizerForm } from "./forms/OrganizerForm"
-import { RegisterVForm } from "./forms/RegisterForm"
+import { RegisterForm } from "./forms/RegisterForm"
 
 export const Components = {
     EventForm,
     LoginVForm,
-    RegisterVForm,
+    RegisterForm,
     ItemForm,
     Modal,
     PrimaryButton,
-    OrganizerForm
+    OrganizerForm,
+    ErrorMessages
 }
