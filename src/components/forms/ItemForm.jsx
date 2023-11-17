@@ -16,7 +16,7 @@ export function ItemForm(props) {
                     Qté
                 </label>
                 <input required className="w-full border border-gray-300 rounded-xl px-6 py-3 
-                focus:outline-none focus:border-primary mt-2" id="name" name="name" type="text" 
+                focus:outline-none focus:border-primary mt-2" id="number" name="number" type="number" 
                 placeholder="Saisissez la quantité" />
             </div>
             <div className="w-1/12 px-4 py-2 mt-7">
@@ -35,7 +35,7 @@ export function ItemForm(props) {
                     Qté
                 </label>
                 <input required className="w-full border border-gray-300 rounded-xl px-6 py-3 
-                focus:outline-none focus:border-primary mt-2" id="name" name="name" type="text" 
+                focus:outline-none focus:border-primary mt-2" id="number" name="number" type="number" 
                 placeholder="Saisissez la quantité" />
             </div>
             <div className="w-1/12 px-4 py-2 mt-7">

@@ -1,70 +1,48 @@
 import React, {useEffect, useState} from 'react'
 import Header from '../components/headers/Header'
 import { usePageActive } from '../context/PageActiveContext'
-import M1 from '../assets/models/M1.jpg'
-import M2 from '../assets/models/M2.jpg'
-import M3 from '../assets/models/M3.jpg'
-import M4 from '../assets/models/M4.jpg'
+import { Link } from 'react-router-dom';
 
 
 export default function List() {
-    const {setPage} = usePageActive();
+    const {setPage, models} = usePageActive();
+    const [current_category, setCurrentCategory] = useState('birthday');
+
     useEffect(() => {
         setPage('List');
     }, [])
 
     const [categories, setCategories] = useState([
-        'Anniversaire',
-        'Mariage',
-        'Entreprise',
-        'Bébé et enfants',
-        'Soirée',
-        'Salutations',
-        'Prospectus'
+        {
+            label: 'Anniversaire',
+            value: 'birthday'
+        },
+        {
+            label: 'Mariage',
+            value: 'wedding'
+        },
+        {
+            label: 'Entreprise',
+            value: 'company'
+        },
+        {
+            label: 'Bébé et enfants',
+            value: 'babyc'
+        },
+        {
+            label: 'Soirée',
+            value: 'night'
+        },
+        {
+            label: 'Prospectus',
+            value: 'leaflet'
+        },
+        {
+            label: 'Salutations',
+            value: 'greeting'
+        },
     ])
 
-    const models = [
-        {
-            model: M1,
-            label: 'Lorem Ipsum',
-            free: true
-        },
-        {
-            model: M2,
-            label: 'Lorem Ipsum',
-            free: true
-        },
-        {
-            model: M3,
-            label: 'Lorem Ipsum',
-            free: true
-        },
-        {
-            model: M4,
-            label: 'Lorem Ipsum',
-            free: true
-        },
-        {
-            model: M1,
-            label: 'Lorem Ipsum',
-            free: true
-        },
-        {
-            model: M2,
-            label: 'Lorem Ipsum',
-            free: true
-        },
-        {
-            model: M3,
-            label: 'Lorem Ipsum',
-            free: true
-        },
-        {
-            model: M4,
-            label: 'Lorem Ipsum',
-            free: true
-        },
-    ]
 
     return (
         <div className='font-bodoni'>
@@ -72,8 +50,8 @@ export default function List() {
             <div className='flex justify-between items-center'>
                 {categories.map((category, index)=>{
                     return (
-                        <div key={index} className='text-primary text-lg uppercase cursor-pointer hover:text-tertiaire border-b-2 border-tertiaire hover:border-primary duration-300'>
-                            <span>{category}</span>
+                        <div key={index} className={`text-primary text-lg uppercase cursor-pointer  border-b-2 ${current_category === category.value ? 'text-tertiaire border-primary' : 'hover:text-tertiaire hover:border-primary border-tertiaire'} duration-300`} onClick={()=>setCurrentCategory(category.value)}>
+                            <span>{category.label}</span>
                         </div>
                     )
                 })}
@@ -85,11 +63,11 @@ export default function List() {
                 </div>
                 <div className='flex gap-2 items-center select-none'>
                     <input type="checkbox" className='' id='basic'/>
-                    <label className='text-xl capitalize hover:text-tertiaire cursor-pointer duration-300' for="basic">Modèle nasique <i className="bi bi-pencil-square"></i></label>
+                    <label className='text-xl capitalize hover:text-tertiaire cursor-pointer duration-300' htmlFor="basic">Modèle basique <i className="bi bi-pencil-square"></i></label>
                 </div>
                 <div className='flex gap-2 items-center hover:text-tertiaire cursor-pointer duration-300 select-none'>
                     <input type="checkbox" className='' id='exclu'/>
-                    <label className='text-xl capitalize hover:text-tertiaire cursor-pointer duration-300' for="exclu">Modèles exclusif <i className="bi bi bi-currency-exchange"></i></label>
+                    <label className='text-xl capitalize hover:text-tertiaire cursor-pointer duration-300' htmlFor="exclu">Modèles exclusif <i className="bi bi bi-currency-exchange"></i></label>
                 </div>
             </div>
             <div className='overflow-y-auto h-[35em] pb-10'>
@@ -98,10 +76,12 @@ export default function List() {
                     {
                         models.map((model, index)=>{
                             return (
-                                <div className='h-88 flex flex-col justify-between mt-4' key={index}>
-                                    <img src={model.model} className='rounded-lg object' alt="" />
-                                    <div className='text-bottom pt-4'>{model.label}</div>
-                                </div>
+                                model.category === current_category && (
+                                    <Link to={`/app/customs/${model.id}`} className='h-88 flex flex-col justify-between mt-4' key={index}>
+                                        <img src={model.model} className='rounded-lg object' alt="" />
+                                        <div className='text-bottom pt-4'>{model.label}</div>
+                                    </Link>
+                                )
                             )
                         })
                     }
